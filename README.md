@@ -103,11 +103,11 @@ It's time to build the first container.
 1. Open another SSH terminal to the VM if the AKS deployment is still running.
 2. Pull artifacts from git.
    ```powershell
-   git clone https://github.com/szasza576/azplayground
+   git clone https://github.com/szasza576/oe-kubernetes
    ```
 3. Build the first container (SSH)
    ```powershell
-   docker build -t boy:latest ./azplayground/nginx/boy/
+   docker build -t boy:latest ./oe-kubernetes/nginx/boy/
    ```
 Hurray we have a container.
 
@@ -131,7 +131,7 @@ Diversity is number 1 so build a container for the girls too.
 Instead of using a build VM we use the Registry's built in feature sourcing from the VM.
 1. Start a build in Azure CLI
    ```powershell
-   az acr build -r $ACRName ./azplayground/nginx/girl/ --platform linux -t girl:latest
+   az acr build -r $ACRName ./oe-kubernetes/nginx/girl/ --platform linux -t girl:latest
    ```
 
 ## Build our third container
@@ -142,7 +142,7 @@ To Build our third container we will use the ACR's other feature which monitors 
    ```
 1. Create a task in Azure CLI
    ```powershell
-   az acr task create --registry $ACRName --name buildneutral --image neutral:latest --context https://github.com/szasza576/azplayground.git --file nginx/neutral/Dockerfile --git-access-token $PAT
+   az acr task create --registry $ACRName --name buildneutral --image neutral:latest --context https://github.com/szasza576/oe-kubernetes.git --file nginx/neutral/Dockerfile --git-access-token $PAT
    ```
 2. Run the task manually
    ```powershell
@@ -284,7 +284,7 @@ The boys and girls are outdated as they have burnt in html page. The "neutral" i
 6. Select your new **Storage Account**
 7. Select **File shares** at the left menu
 8. Select your **File Share**. Called **neutral-html**
-9. Download the neutral's html locally from [the github](https://raw.githubusercontent.com/szasza576/azplayground/master/nginx/neutral/index.html)
+9. Download the neutral's html locally from [the github](https://raw.githubusercontent.com/szasza576/oe-kubernetes/master/nginx/neutral/index.html)
 10. Click on **Upload**
 11. Browse the previously downloaded index.html
 12. Click on **Upload**
