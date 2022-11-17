@@ -183,14 +183,6 @@ When the deployment is done then we can deploy our containers on AKS.
    kubectl get pods
    ```
 
-## Enable an addon in AKS
-Ooooohh Noooo!!!! We forgot the ingress controller.
-
-No worries. Instead of redeployment we just enable the addon.
-   ```powershell
-   az aks enable-addons --resource-group $ResourceGroup --name    $AKSName --addons http_application_routing
-   ```
-
 ## Expose the "boys" to internet
 We need an external IP address and then create a loadbalancer based on that. We can use the portal for this task ... or just create the proper K8s Service which does it for us.
 
@@ -311,6 +303,14 @@ Kubernetes needs an authentication token to the Storage.
    kubectl get pods
    ```
 
+## Enable an addon in AKS
+Ooooohh Noooo!!!! We forgot the ingress controller.
+
+No worries. Instead of redeployment we just enable the addon.
+   ```powershell
+   az aks enable-addons --resource-group $ResourceGroup --name    $AKSName --addons http_application_routing
+   ```
+
 ## Expose applications via Ingress Controller
 Very typical case to use Ingress Controller. AKS provides a Basic IC for testing purposes and an advanced one with Application GW. We activated the Basic one earlier so let's use that one.
 
@@ -325,7 +325,7 @@ Very typical case to use Ingress Controller. AKS provides a Basic IC for testing
    ```powershell
    kubectl create -f ingress-kids-path.yml
    ```
-3. Get the IP addres of the Basic IC
+3. Get the IP address of the Basic IC
    ```powershell
    kubectl get services -n kube-system addon-http-application-routing-nginx-ingress
    ```
@@ -336,7 +336,7 @@ Very typical case to use Ingress Controller. AKS provides a Basic IC for testing
    - http://\<yourIP\>/random
 
 ## Scale the cluster automatically
-Let's increase the Deplyoment size and then see how it scales the nodes.
+Let's increase the Deployment size and then see how it scales the nodes.
 1. Edit the deployment file and change replica count from 1 to 5.
    ```powershell
    kubectl edit deployments boy
@@ -367,7 +367,7 @@ Before we would delete the deployment we make a template from the concept.
 Now we can clean up the deployment.
 
 ## Clean up
-Similar as we did at the beginning delete the whole resource group
+To clean up just delete the whole resource group. This will delete all the resources inside it.
 1. Navigate to your own **Resource group**
 2. On the top menu click on **Delete resource group**
 3. You need to re-enter its Name.

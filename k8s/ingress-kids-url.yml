@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kids-ingress
@@ -9,39 +9,40 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-  - host: boy.aks1.eu.anything
+  - host: boy.devopsXX.azuredemo.eu
     http:
       paths:
-      - path: /boy
+      - path: /
         pathType: Prefix 
         backend:
           service:
             name: boy-internal
             port:
               number: 80
-  - host: girl.aks1.eu.anything
+  - host: girl.devopsXX.azuredemo.eu
     http:
       paths:
-      - path: /girl
+      - path: /
         pathType: Prefix 
         backend:
           service:
             name: girl-internal
             port:
               number: 80
-  - host: random.aks1.eu.anything
+  - host: random.devopsXX.azuredemo.eu
     http:
       paths:
-      - path: /random
+      - path: /
         pathType: Prefix 
         backend:
           service:
             name: random-internal
             port:
               number: 80
-  - http:
+  - host: devopsXX.azuredemo.eu
+    http:
       paths:
-      - path: /random
+      - path: /
         pathType: Prefix 
         backend:
           service:
