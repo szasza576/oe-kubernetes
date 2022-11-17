@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: <yourresourcegroup>
+  name: kids
+spec:
+  loadBalancerIP: <yourip>
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: kids

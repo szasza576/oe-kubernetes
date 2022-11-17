@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neutral
+  labels:
+    app: kids
+    gender: neutral
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kids
+      gender: neutral
+  template:
+    metadata:
+      labels:
+        app: kids
+        gender: neutral
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: neutral
+        image: "<youracr>.azurecr.io/neutral:latest"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: azurefile
+      volumes:
+      - name: azurefile
+        azureFile:
+          secretName: azure-secret
+          shareName: neutral-html
+          readOnly: true

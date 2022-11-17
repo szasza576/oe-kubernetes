@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: neutral-internal
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    gender: neutral
+  type: ClusterIP

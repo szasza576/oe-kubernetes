@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: boy-public
+  annotations:
+   service.beta.kubernetes.io/azure-load-balancer-internal: "false"
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    gender: boy
+  type: LoadBalancer

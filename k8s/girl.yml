@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: girl
+  labels:
+    app: kids
+    gender: girl
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kids
+      gender: girl
+  template:
+    metadata:
+      labels:
+        app: kids
+        gender: girl
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: girl
+        image: "<youracr>.azurecr.io/girl:latest"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+        ports:
+        - containerPort: 80
