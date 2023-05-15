@@ -29,7 +29,7 @@ We will use this VM to deploy stuff in Azure too and to reach the AKS cluster.
 12. Click the **Next** button several times and go to the **Advanced** tab.
 13. At the **Extensions** click on the **Select an extension to install**
 14. Search for **Custom Script For Linux** and click on the tile and the **Next**.
-15. Past the following to the **Command** field:
+15. Paste the following to the **Command** field:
     ```
     curl -sL https://raw.githubusercontent.com/szasza576/oe-kubernetes/master/ubuntu2004-setup/tool-setup.sh | sudo bash
     ```
@@ -126,15 +126,16 @@ We need to authenticate to the ACR and then we will push the image.
 5. On the portal search your **Container Registry**
 6. In the left side menu click on the **Repositories**. And there you should see your new container.
 
-## Build the second container
+## Build the second and third container
 Diversity is number 1 so build a container for the girls too.
 Instead of using a build VM we use the Registry's built in feature sourcing from the VM.
 1. Start a build in Azure CLI
    ```powershell
    az acr build -r $ACRName ./oe-kubernetes/nginx/girl/ --platform linux -t girl:latest
+   az acr build -r $ACRName ./oe-kubernetes/nginx/neutral/ --platform linux -t neutral:latest
    ```
 
-## Build our third container
+## Build our third container (the alternative way)
 To Build our third container we will use the ACR's other feature which monitors the github and automatically build if changes happen.
 1. On github create an [access token](https://github.com/settings/tokens) and create an environment variable. Add **repo:status** and **public_repo** access.
    ```powershell
